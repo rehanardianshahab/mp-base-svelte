@@ -1,0 +1,30 @@
+:root {
+	/* Color Tokens */
+	--color-primary-50: #f0f7ff;
+	--color-primary-500: #3b82f6;
+	--color-primary-700: #1d4ed8;
+
+	--color-neutral-100: #f3f4f6;
+	--color-neutral-900: #111827;
+
+	/* Spacing Tokens (Sistem Kelipatan 4 atau 8) */
+	--space-1: 0.25rem; /* 4px */
+	--space-2: 0.5rem; /* 8px */
+	--space-4: 1rem; /* 16px */
+	--space-6: 1.5rem; /* 24px */
+
+	/* Typography Tokens */
+	--font-sans: 'Inter', system-ui, sans-serif;
+	--size-sm: 0.875rem;
+	--size-base: 1rem;
+	--size-lg: 1.25rem;
+	--size-xl: 1.5rem;
+
+	/* Border Radius */
+	--radius-sm: 4px;
+	--radius-md: 8px;
+	--radius-lg: 16px;
+
+	/* Transitions */
+	--transition-fast: 0.2s ease;
+}
