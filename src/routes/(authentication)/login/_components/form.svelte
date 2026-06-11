@@ -4,7 +4,10 @@
 	import type { SuperForm } from 'sveltekit-superforms';
 	import type { Model } from '../_types/schema';
 
-	let { form, errors }: {
+	let {
+		form,
+		errors
+	}: {
 		form: SuperForm<Model>['form'];
 		errors: SuperForm<Model>['errors'];
 	} = $props();
@@ -15,5 +18,10 @@
 </FormControl>
 
 <FormControl id="password" label="Password" errors={$errors.password}>
-	<FormInput type="password" name="password" errors={$errors.password} bind:value={$form.password} />
+	<FormInput
+		type="password"
+		name="password"
+		errors={$errors.password}
+		bind:value={$form.password}
+	/>
 </FormControl>

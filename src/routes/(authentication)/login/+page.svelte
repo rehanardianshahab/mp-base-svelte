@@ -43,7 +43,11 @@
 				<Card class="flex w-md gap-4 p-6">
 					<PageTitle title="Login" />
 					<FormComponents form={sf.form} errors={sf.errors} />
-					<Button type="submit" class="w-full cursor-pointer bg-primary-500 text-white transition-colors duration-300">Kirim</Button>
+					<Button
+						type="submit"
+						class="w-full cursor-pointer bg-primary-500 text-white transition-colors duration-300"
+						>Kirim</Button
+					>
 				</Card>
 			{/snippet}
 		</FormContainer>

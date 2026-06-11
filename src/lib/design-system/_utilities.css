@@ -19,6 +19,7 @@
 	font-weight: 600;
 }
 
-.text-danger, .text-error {
-	color: var(--color-red-500)
+.text-danger,
+.text-error {
+	color: var(--color-red-500);
 }

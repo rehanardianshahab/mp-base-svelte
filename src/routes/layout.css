@@ -4,6 +4,6 @@
 @plugin 'flowbite/plugin';
 @custom-variant dark (&:where(.dark, .dark *));
 
-@import '$lib/design-system/main.css';
+@import '../lib/design-system/main.css';
 @source '../../node_modules/flowbite-svelte/dist';
 @source '../../node_modules/flowbite-svelte-icons/dist';
