@@ -1,6 +1,13 @@
 <script lang="ts">
-	import { Sidebar, SidebarGroup, SidebarItem, uiHelpers, Button } from 'flowbite-svelte';
-	import { ChartOutline, GridSolid, MailBoxSolid, UserSolid } from 'flowbite-svelte-icons';
+	import { Sidebar, SidebarGroup, SidebarItem, uiHelpers } from 'flowbite-svelte';
+	import {
+		ChartOutline,
+		CloseSidebarAltOutline,
+		GridSolid,
+		MailBoxSolid,
+		OpenSidebarAltOutline,
+		UserSolid
+	} from 'flowbite-svelte-icons';
 	import { page } from '$app/state';
 
 	const { children } = $props();
@@ -10,32 +17,31 @@
 	const activeClass =
 		'flex items-center p-2 text-base font-normal text-primary-900 bg-primary-200 dark:bg-primary-700 rounded-lg dark:text-white hover:bg-primary-100 dark:hover:bg-gray-700';
 	const nonActiveClass =
-		'flex items-center p-2 text-base font-normal text-green-900 rounded-lg dark:text-white hover:bg-green-100 dark:hover:bg-green-700';
+		'flex items-center p-2 text-base font-normal text-primary-900 rounded-lg dark:text-white hover:bg-primary-100 dark:hover:bg-primary-700';
 	const demoSidebarUi = uiHelpers();
-	let isDemoOpen = $state(false);
+	let isSidebarOpen = $state(true);
 	const closeDemoSidebar = demoSidebarUi.close;
 	$effect(() => {
-		isDemoOpen = demoSidebarUi.isOpen;
+		isSidebarOpen = !demoSidebarUi.isOpen;
 		activeUrl = page.url.pathname;
 	});
 
-	// Collapsible helpers for classes
-	const itemAClass = $derived(isDemoOpen ? '' : 'justify-center');
-	const itemSpanClass = $derived(isDemoOpen ? labelClass : 'hidden');
+	const itemAClass = $derived(isSidebarOpen ? '' : 'justify-center');
+	const itemSpanClass = $derived(isSidebarOpen ? labelClass : 'hidden');
 </script>
 
 <div class="relative">
 	<Sidebar
 		{activeUrl}
-		backdrop={false}
-		isOpen={true}
+		backdrop={true}
+		isOpen={isSidebarOpen}
 		closeSidebar={closeDemoSidebar}
 		position="absolute"
 		classes={{ nonactive: nonActiveClass, active: activeClass }}
-		class="z-50 h-screen transition-all duration-300 {isDemoOpen ? 'w-64' : 'w-16!'}"
+		class="z-50 h-screen transition-all duration-300 {isSidebarOpen ? 'w-64' : 'w-16!'}"
 		disableBreakpoints={true}
 	>
-		<SidebarGroup class="flex flex-col gap-4 overflow-x-hidden">
+		<SidebarGroup class="flex flex-col gap-4 overflow-x-hidden p-2">
 			<SidebarItem
 				label="Dashboard"
 				href="/dashboard"
@@ -55,7 +61,7 @@
 					/>
 				{/snippet}
 				{#snippet subtext()}
-					{#if isDemoOpen}
+					{#if isSidebarOpen}
 						<span
 							class="ms-3 inline-flex items-center justify-center rounded-full bg-gray-200 px-2 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
 							>Pro</span
@@ -70,7 +76,7 @@
 					/>
 				{/snippet}
 				{#snippet subtext()}
-					{#if isDemoOpen}
+					{#if isSidebarOpen}
 						<span
 							class="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-primary-200 p-3 text-sm font-medium text-primary-600 dark:bg-primary-900 dark:text-primary-200"
 							>3</span
@@ -88,16 +94,25 @@
 		</SidebarGroup>
 	</Sidebar>
 	<div
-		class="h-96 overflow-auto px-4 transition-all duration-300 {isDemoOpen
+		class="h-screen overflow-auto pl-4 transition-all duration-300 {isSidebarOpen
 			? 'md:ml-60'
 			: 'md:ml-12'}"
 	>
-		<div class="mb-2 bg-red-100 p-4">
-			<Button onclick={demoSidebarUi.toggle}>
-				{isDemoOpen ? 'Close Sidebar' : 'Open Sidebar'}
-			</Button>
-			{JSON.stringify(isDemoOpen)}
+		<div class="mb-2 bg-red-100 px-12 py-4">
+			{#if isSidebarOpen}
+				<CloseSidebarAltOutline
+					class="h-6 w-6 shrink-0 cursor-pointer"
+					onclick={demoSidebarUi.toggle}
+				/>
+			{:else}
+				<OpenSidebarAltOutline
+					class="h-6 w-6 shrink-0 cursor-pointer"
+					onclick={demoSidebarUi.toggle}
+				/>
+			{/if}
 		</div>
-		{@render children()}
+		<div class="m-12">
+			{@render children()}
+		</div>
 	</div>
 </div>
